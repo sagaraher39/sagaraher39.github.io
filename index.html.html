@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sagar Aher — QA Engineer & SDET</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0a0a0f;
+  --surface:#111118;
+  --surface2:#18181f;
+  --border:#ffffff0f;
+  --border2:#ffffff18;
+  --text:#f0f0f5;
+  --muted:#7a7a90;
+  --accent:#00e5a0;
+  --accent2:#0077ff;
+  --accent-dim:#00e5a015;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 3.5rem;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  z-index:200;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:1rem;
+  letter-spacing:0.04em;
+  color:var(--text);text-decoration:none;
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:0.82rem;font-weight:500;
+  letter-spacing:0.07em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--accent)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:9rem 3.5rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black,transparent);
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(0,229,160,0.08) 0%,transparent 70%);
+  top:-100px;right:-100px;
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-tag::before{
+  content:'';width:24px;height:1px;background:var(--accent);
+}
+h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3rem,7vw,6rem);
+  font-weight:800;
+  line-height:0.98;
+  letter-spacing:-0.03em;
+  margin-bottom:0.4rem;
+  animation:fadeUp 0.7s 0.08s ease both;
+}
+.h1-sub{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.2rem,2.5vw,2rem);
+  font-weight:400;
+  color:var(--muted);
+  letter-spacing:-0.01em;
+  margin-bottom:2rem;
+  animation:fadeUp 0.7s 0.15s ease both;
+}
+.h1-sub span{color:var(--accent)}
+.hero-desc{
+  font-size:1rem;color:var(--muted);
+  max-width:540px;line-height:1.8;
+  margin-bottom:2.5rem;
+  animation:fadeUp 0.7s 0.22s ease both;
+}
+.hero-contact{
+  display:flex;flex-wrap:wrap;gap:1.5rem;
+  margin-bottom:2.5rem;
+  animation:fadeUp 0.7s 0.28s ease both;
+}
+.contact-pill{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.85rem;color:var(--muted);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.contact-pill:hover{color:var(--accent)}
+.contact-pill svg{flex-shrink:0;opacity:0.6}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.34s ease both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.75rem 1.6rem;border-radius:6px;
+  font-size:0.88rem;font-weight:600;
+  cursor:pointer;transition:all 0.22s;
+  text-decoration:none;border:none;
+  font-family:'Outfit',sans-serif;
+}
+.btn-primary{
+  background:var(--accent);color:#000;
+}
+.btn-primary:hover{
+  background:#00ffb3;
+  box-shadow:0 0 32px rgba(0,229,160,0.35);
+  transform:translateY(-2px);
+}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border2);
+}
+.btn-ghost:hover{
+  border-color:var(--accent);color:var(--accent);
+  transform:translateY(-2px);
+}
+.experience-bar{
+  position:absolute;right:3.5rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.4rem;
+  animation:fadeIn 1s 0.5s ease both;
+}
+.exp-num{
+  font-family:'Syne',sans-serif;
+  font-size:5rem;font-weight:800;
+  color:var(--accent);line-height:1;
+  text-shadow:0 0 60px rgba(0,229,160,0.3);
+}
+.exp-label{
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);text-align:center;
+}
+
+/* ── SECTIONS ── */
+section{padding:6rem 3.5rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-header{margin-bottom:3.5rem}
+.section-num{
+  font-family:'Syne',sans-serif;
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.5rem;
+}
+h2{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:800;letter-spacing:-0.02em;
+  line-height:1.1;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--surface)}
+.about-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:4rem;align-items:start;
+}
+.about-text p{
+  color:var(--muted);margin-bottom:1.1rem;
+  font-size:0.97rem;line-height:1.8;
+}
+.about-text p strong{color:var(--text);font-weight:600}
+.info-list{
+  display:flex;flex-direction:column;gap:0.9rem;
+}
+.info-row{
+  display:flex;justify-content:space-between;
+  padding:0.75rem 0;
+  border-bottom:1px solid var(--border);
+  font-size:0.87rem;
+}
+.info-row .key{color:var(--muted);font-weight:500}
+.info-row .val{color:var(--text);font-weight:500;text-align:right}
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  margin-top:2.5rem;
+}
+.stat{
+  background:var(--bg);
+  padding:1.5rem;text-align:center;
+}
+.stat .n{
+  font-family:'Syne',sans-serif;
+  font-size:2.2rem;font-weight:800;
+  color:var(--accent);line-height:1;
+}
+.stat .l{font-size:0.78rem;color:var(--muted);margin-top:0.3rem}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg)}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+}
+.skill-card{
+  background:var(--bg);
+  padding:2rem;
+  transition:background 0.2s;
+  cursor:default;
+}
+.skill-card:hover{background:var(--surface2)}
+.skill-icon{
+  width:40px;height:40px;
+  background:var(--accent-dim);
+  border:1px solid rgba(0,229,160,0.2);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  margin-bottom:1.2rem;
+}
+.skill-card h3{
+  font-family:'Syne',sans-serif;
+  font-size:1rem;font-weight:700;
+  margin-bottom:0.5rem;
+}
+.skill-card p{font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  color:var(--muted);
+  font-size:0.72rem;font-weight:600;
+  padding:0.2rem 0.6rem;border-radius:4px;
+  letter-spacing:0.03em;
+  transition:color 0.2s,border-color 0.2s;
+}
+.skill-card:hover .tag{border-color:rgba(0,229,160,0.2);color:var(--accent)}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--surface)}
+.exp-tabs{
+  display:flex;gap:0;
+  border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  margin-bottom:2.5rem;
+  flex-wrap:wrap;
+}
+.exp-tab{
+  flex:1;padding:0.85rem 1rem;
+  background:var(--bg);
+  border:none;
+  color:var(--muted);
+  font-family:'Outfit',sans-serif;
+  font-size:0.82rem;font-weight:600;
+  letter-spacing:0.03em;
+  cursor:pointer;
+  transition:all 0.2s;
+  border-right:1px solid var(--border);
+  text-align:center;
+}
+.exp-tab:last-child{border-right:none}
+.exp-tab.active{background:var(--accent);color:#000}
+.exp-tab:hover:not(.active){background:var(--surface2);color:var(--text)}
+.exp-panel{display:none}
+.exp-panel.active{display:block;animation:fadeIn 0.3s ease}
+.exp-header{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+  margin-bottom:1.5rem;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+.exp-title{
+  font-family:'Syne',sans-serif;
+  font-size:1.3rem;font-weight:800;
+  margin-bottom:0.3rem;
+}
+.exp-company{font-size:0.9rem;color:var(--accent);font-weight:600}
+.exp-meta{font-size:0.8rem;color:var(--muted);margin-top:0.2rem}
+.exp-badge{
+  background:var(--accent-dim);
+  border:1px solid rgba(0,229,160,0.2);
+  color:var(--accent);
+  font-size:0.75rem;font-weight:700;
+  padding:0.35rem 0.8rem;border-radius:20px;
+  white-space:nowrap;
+  letter-spacing:0.05em;
+}
+.exp-list{
+  list-style:none;display:flex;flex-direction:column;gap:0.85rem;
+}
+.exp-list li{
+  display:flex;gap:1rem;
+  font-size:0.9rem;color:var(--muted);
+  line-height:1.65;
+}
+.exp-list li::before{
+  content:'→';
+  color:var(--accent);font-weight:700;
+  flex-shrink:0;margin-top:0.05rem;
+}
+
+/* ── EDUCATION ── */
+#education{background:var(--bg)}
+.edu-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.5rem;
+}
+.edu-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;padding:2rem;
+  position:relative;overflow:hidden;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.edu-card:hover{
+  border-color:rgba(0,229,160,0.3);
+  transform:translateY(-4px);
+}
+.edu-card::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.edu-card:hover::after{transform:scaleX(1)}
+.edu-year{
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.6rem;
+}
+.edu-card h3{
+  font-family:'Syne',sans-serif;
+  font-size:1.05rem;font-weight:800;
+  margin-bottom:0.3rem;line-height:1.3;
+}
+.edu-school{font-size:0.85rem;color:var(--muted);margin-bottom:0.3rem}
+.edu-grade{
+  font-size:0.8rem;font-weight:600;
+  color:var(--accent);
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:3rem 3.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1.5rem;
+}
+.footer-name{
+  font-family:'Syne',sans-serif;
+  font-size:1.1rem;font-weight:800;
+}
+.footer-name span{color:var(--accent)}
+.footer-copy{font-size:0.8rem;color:var(--muted)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{
+  font-size:0.82rem;color:var(--muted);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--accent)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.2rem}
+  #hero{padding:8rem 1.5rem 4rem}
+  .experience-bar{display:none}
+  section{padding:4rem 1.5rem}
+  .about-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr 1fr}
+  footer{padding:2rem 1.5rem}
+  h1{font-size:2.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Sagar<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">Available for Opportunities</div>
+
+  <h1>Sagar Aher</h1>
+  <p class="h1-sub">QA Engineer &amp; <span>SDET</span></p>
+
+  <p class="hero-desc">
+    Software Quality Engineer with <strong>4+ years</strong> of hands-on experience in Manual &amp; Automation Testing for web, mobile, and telecom applications. Skilled in building robust test frameworks and delivering quality at scale.
+  </p>
+
+  <div class="hero-contact">
+    <a href="mailto:sagaraher39@gmail.com" class="contact-pill">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      sagaraher39@gmail.com
+    </a>
+    <a href="tel:+917776839036" class="contact-pill">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+      +91 77768 39036
+    </a>
+    <span class="contact-pill">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Hinjewadi, Pune
+    </span>
+  </div>
+
+  <div class="hero-btns">
+    <a href="mailto:sagaraher39@gmail.com" class="btn btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+      Hire Me
+    </a>
+    <a href="#experience" class="btn btn-ghost">View Experience ↓</a>
+  </div>
+
+  <div class="experience-bar">
+    <div class="exp-num">4+</div>
+    <div class="exp-label">Years of<br>Experience</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-num">01 — About Me</div>
+      <h2>Who I Am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>Software QA Engineer / SDET</strong> currently working at <strong>Cognizant India</strong>, with prior experience at <strong>Tata Consultancy Services</strong>. I specialise in designing end-to-end test strategies for web, mobile, and telecom applications.</p>
+        <p>I've worked across diverse domains — from <strong>Telecom (Ericsson)</strong> and <strong>Banking (CIBC)</strong> to <strong>Defense Technology (L3Harris)</strong> — bringing deep QA expertise to each engagement.</p>
+        <p>I'm passionate about <strong>shift-left testing</strong>, automation frameworks, and building quality into every stage of the SDLC. Beyond testing, I've been trained in <strong>cloud infrastructure</strong> on VMware and Red Hat OpenShift platforms.</p>
+
+        <div class="stats-row">
+          <div class="stat"><div class="n">4+</div><div class="l">Years Exp.</div></div>
+          <div class="stat"><div class="n">3</div><div class="l">Major Projects</div></div>
+          <div class="stat"><div class="n">3</div><div class="l">Domains</div></div>
+        </div>
+      </div>
+
+      <div class="info-list reveal">
+        <div class="info-row"><span class="key">Full Name</span><span class="val">Sagar Machhindra Aher</span></div>
+        <div class="info-row"><span class="key">Date of Birth</span><span class="val">31 May 1997</span></div>
+        <div class="info-row"><span class="key">Location</span><span class="val">Hinjewadi, Pune</span></div>
+        <div class="info-row"><span class="key">Languages</span><span class="val">English, Marathi, Hindi</span></div>
+        <div class="info-row"><span class="key">Current Role</span><span class="val">QA Engineer @ Cognizant</span></div>
+        <div class="info-row"><span class="key">Email</span><span class="val">sagaraher39@gmail.com</span></div>
+        <div class="info-row"><span class="key">Phone</span><span class="val">+91 77768 39036</span></div>
+        <div class="info-row"><span class="key">Status</span><span class="val" style="color:var(--accent)">Open to Offers ✦</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-num">02 — Skills</div>
+      <h2>Technical Expertise</h2>
+    </div>
+    <div class="skills-grid reveal">
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>Test Automation</h3>
+        <p>Building scalable, maintainable automation frameworks from scratch and integrating with CI/CD pipelines.</p>
+        <div class="tags">
+          <span class="tag">Selenium WebDriver</span>
+          <span class="tag">Robot Framework</span>
+          <span class="tag">Appium</span>
+          <span class="tag">HP UFT</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <h3>Mobile Testing</h3>
+        <p>End-to-end testing of Android &amp; iOS mobile apps including banking and enterprise applications.</p>
+        <div class="tags">
+          <span class="tag">Android</span>
+          <span class="tag">iOS</span>
+          <span class="tag">Appium</span>
+          <span class="tag">Mobile Banking</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <h3>Manual Testing</h3>
+        <p>Comprehensive test case design, execution and defect lifecycle management using industry best practices.</p>
+        <div class="tags">
+          <span class="tag">Functional</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Smoke & Sanity</span>
+          <span class="tag">UAT</span>
+          <span class="tag">E2E</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <h3>API & Integration</h3>
+        <p>REST API testing and validation, integration testing across complex distributed systems.</p>
+        <div class="tags">
+          <span class="tag">REST API</span>
+          <span class="tag">Integration Testing</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">Linux/Bash</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <h3>Tools & Management</h3>
+        <p>Proficient in leading QA tools for test management, defect tracking, and CI/CD workflows.</p>
+        <div class="tags">
+          <span class="tag">Jira</span>
+          <span class="tag">Xray</span>
+          <span class="tag">HP ALM</span>
+          <span class="tag">Bugzilla</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud & Infrastructure</h3>
+        <p>Trained in infrastructure setup and cloud platform management for test environment configuration.</p>
+        <div class="tags">
+          <span class="tag">VMware</span>
+          <span class="tag">Red Hat OpenShift</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Agile/Scrum</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-num">03 — Experience</div>
+      <h2>Work History</h2>
+    </div>
+
+    <div class="exp-tabs reveal">
+      <button class="exp-tab active" onclick="showTab(0)">Cognizant — L3Harris</button>
+      <button class="exp-tab" onclick="showTab(1)">TCS — CIBC Banking</button>
+      <button class="exp-tab" onclick="showTab(2)">TCS — Ericsson Telecom</button>
+    </div>
+
+    <!-- Panel 0: L3Harris -->
+    <div class="exp-panel active reveal" id="panel-0">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">QA Engineer — L3Harris</div>
+          <div class="exp-company">Cognizant India</div>
+          <div class="exp-meta">Manual &amp; Automation QA Engineer · Defense Technology Domain</div>
+        </div>
+        <div class="exp-badge">Current Role</div>
+      </div>
+      <ul class="exp-list">
+        <li>Proficient in identifying, documenting, and tracking software defects throughout the full defect lifecycle using Jira and Bugzilla.</li>
+        <li>Performed root cause analysis (RCA) to facilitate timely resolution and prevent recurrence of critical defects.</li>
+        <li>Planned and executed comprehensive regression test suites to ensure software stability across multiple sprint releases.</li>
+        <li>Applied risk-based testing techniques and impact analysis to prioritise test coverage effectively.</li>
+        <li>Collaborated with development engineers, product managers, and business stakeholders in an Agile/Scrum environment.</li>
+        <li>Applied ISTQB-aligned QA standards and test design techniques including boundary value analysis and equivalence partitioning.</li>
+        <li>Provided timely QA sign-off, status updates, and defect reports to cross-functional teams.</li>
+      </ul>
+    </div>
+
+    <!-- Panel 1: CIBC -->
+    <div class="exp-panel" id="panel-1">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">QA Engineer — CIBC Mobile Banking</div>
+          <div class="exp-company">Tata Consultancy Services India</div>
+          <div class="exp-meta">Manual &amp; Automation QA · Banking &amp; Financial Services · Android &amp; iOS</div>
+        </div>
+        <div class="exp-badge">BFSI Domain</div>
+      </div>
+      <ul class="exp-list">
+        <li>Executed feature and regression testing for a mobile banking application (Android and iOS) for Canadian Imperial Bank of Commerce (CIBC).</li>
+        <li>Developed and maintained automated test scripts using Robot Framework with Python for functional and regression test suites.</li>
+        <li>Configured test environments based on client requirements and validated mobile app behaviour across multiple platforms.</li>
+        <li>Provided hypercare support for monitoring batch jobs and production stability post-release.</li>
+        <li>Collaborated with the development team to perform defect triage, root cause analysis, and timely issue resolution.</li>
+        <li>Supported UAT cycles and coordinated with QA leads, business analysts, and stakeholders throughout the release lifecycle.</li>
+        <li>Delivered system demos to end users to facilitate onboarding and understanding of application workflows.</li>
+      </ul>
+    </div>
+
+    <!-- Panel 2: Ericsson -->
+    <div class="exp-panel" id="panel-2">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">QA Engineer — Ericsson Telecom</div>
+          <div class="exp-company">Tata Consultancy Services India</div>
+          <div class="exp-meta">Manual &amp; Automation QA · Telecom Domain · Since Nov 2021</div>
+        </div>
+        <div class="exp-badge">Telecom</div>
+      </div>
+      <ul class="exp-list">
+        <li>Configured systems and virtual machines based on client requirements for end-to-end testing of telecom modules.</li>
+        <li>Designed, created, and maintained test cases and test suites in the X-ray test management tool integrated with Jira.</li>
+        <li>Managed Change Requests (CRs) and performed required customisation changes, ensuring traceability throughout the SDLC.</li>
+        <li>Handled issues related to communication protocols, performing root cause analysis and coordinating with technical teams.</li>
+        <li>Responsible for E2E Regression Testing of business scenarios, lab installation, and integration using Ansible scripts and Linux CLI.</li>
+        <li>Trained for cloud infrastructure building on VMware and RHOS (Red Hat OpenShift) platforms.</li>
+        <li>Provided onboarding training to new joiners and conducted demos, contributing to a 10% improvement in user satisfaction scores.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-num">04 — Education</div>
+      <h2>Academic Background</h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <div class="edu-year">2019 – 2021</div>
+        <h3>Master of Technology (M.Tech)</h3>
+        <div class="edu-school">Sandip University, Nashik</div>
+        <div class="edu-grade">🏅 First Class with Distinction</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-year">2015 – 2019</div>
+        <h3>Bachelor of Engineering (B.E.)</h3>
+        <div class="edu-school">Pune University</div>
+        <div class="edu-grade">🏅 First Class with Distinction</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-year">2013 – 2016</div>
+        <h3>Diploma in Electrical Engineering</h3>
+        <div class="edu-school">MSBTE</div>
+        <div class="edu-grade">📊 75.76%</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Sagar<span>.</span>Aher</div>
+  <div class="footer-copy">© 2025 · QA Engineer &amp; SDET · Pune, India</div>
+  <div class="footer-links">
+    <a href="mailto:sagaraher39@gmail.com">Email</a>
+    <a href="tel:+917776839036">Phone</a>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+function showTab(idx){
+  document.querySelectorAll('.exp-tab').forEach((t,i)=>{
+    t.classList.toggle('active', i===idx);
+  });
+  document.querySelectorAll('.exp-panel').forEach((p,i)=>{
+    p.classList.toggle('active', i===idx);
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
